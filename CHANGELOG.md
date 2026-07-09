@@ -12,3 +12,6 @@ All notable changes to this repository, in chronological order.
   running the app alongside an nginx reverse proxy (`nginx/dev.conf`) on
   `localhost:8080`.
 - Opened PR #1 (`feature/fastapi-docker-dev-proxy`) with the above.
+- Exposed the `proxy` service publicly at https://swurl.dev.lilnas.io via the
+  shared `lilnas-proxy` Traefik network (no `forward-auth` gating — public by
+  request). Updated `BASE_URL` so generated short links use the public domain.

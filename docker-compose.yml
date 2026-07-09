@@ -6,7 +6,7 @@ services:
       - ./app:/code/app
     environment:
       - DATABASE_URL=sqlite:///./shortener.db
-      - BASE_URL=http://localhost:8080
+      - BASE_URL=https://swurl.dev.lilnas.io
     expose:
       - "8000"
 
@@ -18,3 +18,17 @@ services:
       - ./nginx/dev.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - app
+    networks:
+      - default
+      - lilnas-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=lilnas-proxy
+      - traefik.http.routers.dev-swurl.rule=Host(`swurl.dev.lilnas.io`)
+      - traefik.http.routers.dev-swurl.entrypoints=websecure
+      - traefik.http.routers.dev-swurl.tls=true
+      - traefik.http.services.dev-swurl.loadbalancer.server.port=80
+
+networks:
+  lilnas-proxy:
+    external: true
