@@ -2,6 +2,8 @@ import os
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.responses import RedirectResponse
+from prometheus_fastapi_instrumentator import Instrumentator
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app import models, schemas
@@ -13,6 +15,8 @@ Base.metadata.create_all(bind=engine)
 BASE_URL = os.environ.get("BASE_URL", "http://localhost:8000")
 
 app = FastAPI(title="URL Shortener")
+
+Instrumentator().instrument(app).expose(app)
 
 
 @app.post("/shorten", response_model=schemas.URLResponse)
@@ -53,3 +57,10 @@ def get_url_stats(code: str, db: Session = Depends(get_db)):
         created_at=url.created_at,
         visits=url.visits,
     )
+
+
+@app.get("/api/stats", response_model=schemas.StatsResponse)
+def get_stats(db: Session = Depends(get_db)):
+    total_links = db.query(func.count(models.URL.id)).scalar()
+    total_visits = db.query(func.coalesce(func.sum(models.URL.visits), 0)).scalar()
+    return schemas.StatsResponse(total_links=total_links, total_visits=total_visits)

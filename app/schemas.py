@@ -16,3 +16,8 @@ class URLResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class StatsResponse(BaseModel):
+    total_links: int
+    total_visits: int

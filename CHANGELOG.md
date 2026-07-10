@@ -15,3 +15,6 @@ All notable changes to this repository, in chronological order.
 - Exposed the `proxy` service publicly at https://swurl.dev.lilnas.io via the
   shared `lilnas-proxy` Traefik network (no `forward-auth` gating — public by
   request). Updated `BASE_URL` so generated short links use the public domain.
+- Added usage tracking: `GET /api/stats` (aggregate total links + total
+  visits) and a Prometheus-format `GET /metrics` endpoint via
+  `prometheus-fastapi-instrumentator`.

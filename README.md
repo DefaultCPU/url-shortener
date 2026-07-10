@@ -42,6 +42,13 @@ curl -X POST http://localhost:8080/shorten \
 
 Visit the returned `short_url` to be redirected to the original URL.
 
+## Usage tracking
+
+- `GET /api/stats` — aggregate counts: total links created and total redirect
+  visits across all links.
+- `GET /metrics` — Prometheus-format metrics (request counts, latencies,
+  status codes per endpoint), via `prometheus-fastapi-instrumentator`.
+
 ## Public dev URL
 
 This project is exposed on the NAS at **https://swurl.dev.lilnas.io** via the shared `lilnas-proxy` Traefik network (see `docker-compose.yml`'s `proxy` service labels). The route is public with no authentication — anyone with the link can use it. Bring it up with:
