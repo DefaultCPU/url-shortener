@@ -18,3 +18,8 @@ All notable changes to this repository, in chronological order.
 - Added usage tracking: `GET /api/stats` (aggregate total links + total
   visits) and a Prometheus-format `GET /metrics` endpoint via
   `prometheus-fastapi-instrumentator`.
+- Added a landing page at `GET /` (`app/templates/index.html`,
+  `app/static/style.css`, `app/static/app.js`): a live counter polling
+  `/api/stats`, and a canvas background animation of randomly generated
+  URL-like strings swirling around the center, orbiting on their own at idle
+  and gaining extra rotational speed in response to page scroll.

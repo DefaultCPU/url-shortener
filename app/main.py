@@ -1,7 +1,9 @@
 import os
+from pathlib import Path
 
 from fastapi import Depends, FastAPI, HTTPException
-from fastapi.responses import RedirectResponse
+from fastapi.responses import FileResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from prometheus_fastapi_instrumentator import Instrumentator
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -13,10 +15,18 @@ from app.shortener import generate_unique_code
 Base.metadata.create_all(bind=engine)
 
 BASE_URL = os.environ.get("BASE_URL", "http://localhost:8000")
+APP_DIR = Path(__file__).parent
 
 app = FastAPI(title="URL Shortener")
 
 Instrumentator().instrument(app).expose(app)
+
+app.mount("/static", StaticFiles(directory=APP_DIR / "static"), name="static")
+
+
+@app.get("/", include_in_schema=False)
+def index():
+    return FileResponse(APP_DIR / "templates" / "index.html")
 
 
 @app.post("/shorten", response_model=schemas.URLResponse)
