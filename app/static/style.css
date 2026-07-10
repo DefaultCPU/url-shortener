@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+:root {
+  --accent: #5eead4;
+  --accent-hover: #7ff3e0;
+  --accent-status: #93c5fd;
+}
+
 html,
 body {
   margin: 0;
@@ -36,7 +42,7 @@ body {
   font-size: 4rem;
   margin: 0;
   letter-spacing: -0.02em;
-  color: #5eead4;
+  color: var(--accent);
 }
 
 .tagline {
@@ -71,7 +77,7 @@ body {
 .shorten-form input:focus,
 .result-input:focus {
   outline: none;
-  border-color: #5eead4;
+  border-color: var(--accent);
 }
 
 .shorten-form button {
@@ -81,13 +87,13 @@ body {
   padding: 0.75rem 1.25rem;
   border-radius: 0.5rem;
   border: none;
-  background: #5eead4;
+  background: var(--accent);
   color: #0b0f14;
   cursor: pointer;
 }
 
 .shorten-form button:hover {
-  background: #7ff3e0;
+  background: var(--accent-hover);
 }
 
 .result-row {
@@ -101,8 +107,23 @@ body {
 .result-input {
   flex: 1;
   min-width: 0;
-  color: #5eead4;
+  color: var(--accent);
   cursor: pointer;
+}
+
+.result-input.flash {
+  animation: result-flash 0.6s ease;
+}
+
+@keyframes result-flash {
+  0% {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.55);
+  }
+  100% {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 10px rgba(94, 234, 212, 0);
+  }
 }
 
 .copy-button {
@@ -112,13 +133,13 @@ body {
   padding: 0.75rem 1.25rem;
   border-radius: 0.5rem;
   border: none;
-  background: #5eead4;
+  background: var(--accent);
   color: #0b0f14;
   cursor: pointer;
 }
 
 .copy-button:hover {
-  background: #7ff3e0;
+  background: var(--accent-hover);
 }
 
 .shorten-error {
@@ -151,7 +172,25 @@ body {
   font-size: 2.5rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: #f8fafc;
+  color: var(--accent-status);
+  display: inline-block;
+}
+
+.stat-value.pulse {
+  animation: stat-pulse 0.5s ease;
+}
+
+@keyframes stat-pulse {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.18);
+    color: #f8fafc;
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .stat-label {

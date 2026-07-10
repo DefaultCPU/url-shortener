@@ -28,3 +28,14 @@ All notable changes to this repository, in chronological order.
 - Made the URL input and result fields less transparent for readability, and
   added a "Copy" button below the shortener that writes the result to the
   clipboard (with a fallback for browsers without Clipboard API access).
+- Background animation now spells realistic `swurl.dev.lilnas.io/<code>`
+  strings (matching the real 7-character short code format) instead of
+  randomly generated fake domains.
+- Added a second accent color (`--accent-status`, a soft blue) for the usage
+  counters, visually separating "status" (the stats) from "action" (the
+  shorten/copy buttons, which keep the original teal). Introduced CSS
+  variables (`--accent`, `--accent-hover`, `--accent-status`) for these.
+- Added visual feedback: the result field flashes with a teal glow on a
+  successful shorten, and a stat counter pulses/scales briefly whenever its
+  value changes (not on every poll — only on an actual change).
+- Merged PR #1 (`feature/fastapi-docker-dev-proxy`) into `master`.

@@ -17,6 +17,9 @@
   let lastScrollY = window.scrollY;
   let lastTime = performance.now();
 
+  const CODE_ALPHABET =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
   function randomChars(len, pool) {
     let out = "";
     for (let i = 0; i < len; i++) {
@@ -26,13 +29,8 @@
   }
 
   function randomUrlString() {
-    const lower = "abcdefghijklmnopqrstuvwxyz";
-    const alnum = lower + "0123456789";
-    const tlds = ["io", "dev", "sh", "co", "app", "to", "link"];
-    const domain = randomChars(3 + Math.floor(Math.random() * 5), lower);
-    const tld = tlds[Math.floor(Math.random() * tlds.length)];
-    const code = randomChars(4 + Math.floor(Math.random() * 4), alnum);
-    return `https://${domain}.${tld}/${code}`;
+    const code = randomChars(7, CODE_ALPHABET);
+    return `swurl.dev.lilnas.io/${code}`;
   }
 
   function createStrings() {
@@ -95,10 +93,20 @@
     requestAnimationFrame(frame);
   }
 
+  const lastStatValues = {};
+
   function setCount(id, value) {
     const el = document.getElementById(id);
     if (!el) return;
+    const previous = lastStatValues[id];
     el.textContent = value.toLocaleString();
+    if (previous !== undefined && previous !== value) {
+      el.classList.remove("pulse");
+      // Force reflow so the animation restarts if it's already mid-pulse.
+      void el.offsetWidth;
+      el.classList.add("pulse");
+    }
+    lastStatValues[id] = value;
   }
 
   async function refreshStats() {
@@ -140,6 +148,9 @@
       result.value = data.short_url;
       result.focus();
       result.select();
+      result.classList.remove("flash");
+      void result.offsetWidth;
+      result.classList.add("flash");
       refreshStats();
     } catch (err) {
       showError("Something went wrong. Try again.");
