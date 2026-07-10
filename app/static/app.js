@@ -146,6 +146,26 @@
     }
   }
 
+  async function onCopyClick() {
+    const result = document.getElementById("result-input");
+    const button = document.getElementById("copy-button");
+    if (!result || !result.value) return;
+
+    try {
+      await navigator.clipboard.writeText(result.value);
+    } catch (err) {
+      result.focus();
+      result.select();
+      document.execCommand("copy");
+    }
+
+    const originalText = button.textContent;
+    button.textContent = "Copied!";
+    setTimeout(() => {
+      button.textContent = originalText;
+    }, 1500);
+  }
+
   window.addEventListener("resize", resize);
   window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -154,6 +174,9 @@
 
   const resultInput = document.getElementById("result-input");
   if (resultInput) resultInput.addEventListener("click", () => resultInput.select());
+
+  const copyButton = document.getElementById("copy-button");
+  if (copyButton) copyButton.addEventListener("click", onCopyClick);
 
   resize();
   requestAnimationFrame(frame);

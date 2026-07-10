@@ -25,3 +25,6 @@ All notable changes to this repository, in chronological order.
   and gaining extra rotational speed in response to page scroll.
 - Added a shorten form to the landing page: paste a URL, submit, and the
   resulting short link is shown in a read-only field (click to select/copy).
+- Made the URL input and result fields less transparent for readability, and
+  added a "Copy" button below the shortener that writes the result to the
+  clipboard (with a fallback for browsers without Clipboard API access).
