@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>swurl — URL Shortener</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <main class="hero">
+    <h1>swurl</h1>
+    <p class="tagline">URL shortening made easy</p>
+
+    <form id="shorten-form" class="shorten-form">
+      <input
+        type="url"
+        id="url-input"
+        placeholder="Paste long url here"
+        required
+      />
+      <button type="submit">Shorten</button>
+    </form>
+    <div class="result-row">
+      <input
+        type="text"
+        id="result-input"
+        class="result-input"
+        readonly
+        placeholder="New link appears here"
+      />
+      <button type="button" id="copy-button" class="copy-button">Copy</button>
+    </div>
+    <p class="shorten-error" id="shorten-error" hidden></p>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-value" id="total-links">—</span>
+        <span class="stat-label">links shortened</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="total-visits">—</span>
+        <span class="stat-label">redirects served</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
