@@ -113,8 +113,47 @@
     }
   }
 
+  function showError(message) {
+    const el = document.getElementById("shorten-error");
+    if (!el) return;
+    el.textContent = message;
+    el.hidden = !message;
+  }
+
+  async function onShortenSubmit(event) {
+    event.preventDefault();
+    const input = document.getElementById("url-input");
+    const result = document.getElementById("result-input");
+    showError("");
+
+    try {
+      const res = await fetch("/shorten", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: input.value }),
+      });
+      if (!res.ok) {
+        showError("That doesn't look like a valid URL.");
+        return;
+      }
+      const data = await res.json();
+      result.value = data.short_url;
+      result.focus();
+      result.select();
+      refreshStats();
+    } catch (err) {
+      showError("Something went wrong. Try again.");
+    }
+  }
+
   window.addEventListener("resize", resize);
   window.addEventListener("scroll", onScroll, { passive: true });
+
+  const shortenForm = document.getElementById("shorten-form");
+  if (shortenForm) shortenForm.addEventListener("submit", onShortenSubmit);
+
+  const resultInput = document.getElementById("result-input");
+  if (resultInput) resultInput.addEventListener("click", () => resultInput.select());
 
   resize();
   requestAnimationFrame(frame);

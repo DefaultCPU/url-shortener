@@ -48,11 +48,13 @@ Visit the returned `short_url` to be redirected to the original URL.
   visits across all links.
 - `GET /metrics` — Prometheus-format metrics (request counts, latencies,
   status codes per endpoint), via `prometheus-fastapi-instrumentator`.
-- `GET /` — a landing page (`app/templates/index.html` + `app/static/`)
-  showing the live totals from `/api/stats` (polled every 5s) over an
-  animated canvas background of drifting URL strings. The strings orbit the
-  center on their own at idle and pick up extra spin in response to page
-  scroll (decaying back to the idle rate once scrolling stops).
+- `GET /` — a landing page (`app/templates/index.html` + `app/static/`) with
+  a form to paste a URL and get a short link back (calls `POST /shorten`,
+  result shown in a read-only field you can click to select and copy), live
+  totals from `/api/stats` (polled every 5s), and an animated canvas
+  background of drifting URL strings. The strings orbit the center on their
+  own at idle and pick up extra spin in response to page scroll (decaying
+  back to the idle rate once scrolling stops).
 
 ## Public dev URL
 

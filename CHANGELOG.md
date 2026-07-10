@@ -23,3 +23,5 @@ All notable changes to this repository, in chronological order.
   `/api/stats`, and a canvas background animation of randomly generated
   URL-like strings swirling around the center, orbiting on their own at idle
   and gaining extra rotational speed in response to page scroll.
+- Added a shorten form to the landing page: paste a URL, submit, and the
+  resulting short link is shown in a read-only field (click to select/copy).
