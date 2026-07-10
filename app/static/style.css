@@ -89,10 +89,17 @@ body {
   background: #7ff3e0;
 }
 
-.result-input {
+.result-row {
+  display: flex;
+  gap: 0.5rem;
   width: 100%;
   max-width: 32rem;
   margin-top: 0.75rem;
+}
+
+.result-input {
+  flex: 1;
+  min-width: 0;
   color: #5eead4;
   cursor: pointer;
 }
@@ -100,20 +107,16 @@ body {
 .copy-button {
   font: inherit;
   font-weight: 600;
-  width: 100%;
-  max-width: 32rem;
-  margin-top: 0.5rem;
-  padding: 0.6rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
-  color: #e6f1ee;
+  border: none;
+  background: #5eead4;
+  color: #0b0f14;
   cursor: pointer;
 }
 
 .copy-button:hover {
-  border-color: #5eead4;
-  color: #5eead4;
+  background: #7ff3e0;
 }
 
 .shorten-error {
