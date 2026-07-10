@@ -39,3 +39,8 @@ All notable changes to this repository, in chronological order.
   successful shorten, and a stat counter pulses/scales briefly whenever its
   value changes (not on every poll — only on an actual change).
 - Merged PR #1 (`feature/fastapi-docker-dev-proxy`) into `master`.
+- Added `SCENARIOS.md`: an honest scenario/risk analysis covering intended
+  use cases and concrete failure modes (single-host availability, SQLite
+  data-loss risk with no backups, open abuse surface on `/shorten`, domain
+  dependency), each with current mitigation status and what closing the gap
+  would take. Linked from `README.md`.

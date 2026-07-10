@@ -65,3 +65,7 @@ docker compose up -d
 ```
 
 Traefik picks up the route automatically within seconds. Tear it down with `docker compose down`, which removes the route just as quickly.
+
+## Scenario & risk analysis
+
+See [SCENARIOS.md](SCENARIOS.md) for an honest look at how this is meant to succeed and the concrete ways it could fail (availability, data integrity, abuse, and business risk), along with what closing each gap would take.
